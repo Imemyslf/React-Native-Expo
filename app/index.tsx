@@ -1,17 +1,14 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import CategoriesScreen from "./screens/CategoriesScreen";
 export default function Index() {
   return (
-    <View style={styles.container}>
-      <Text>Hello World!!!!</Text>
-    </View>
+    <SafeAreaView>
+      <CategoriesScreen />
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
+  container: {},
 });
