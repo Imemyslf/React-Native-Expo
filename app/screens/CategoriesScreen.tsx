@@ -1,13 +1,35 @@
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { FlatList, StyleSheet } from "react-native";
 
 import CategoryGridTile from "../components/CategoryGridTile";
 import { CATEGORIES } from "../data/dummy_data";
+import { RootStackParamList } from "../navigation/types";
 
-const renderList = (itemData: { id: string; title: string; color: string }) => {
-  return <CategoryGridTile title={itemData.title} color={itemData.color} />;
-};
+type CategoriesScreenProps = NativeStackScreenProps<
+  RootStackParamList,
+  "MealCategories"
+>;
 
-const CategoriesScreen = () => {
+const CategoriesScreen = (props: CategoriesScreenProps) => {
+  const renderList = (itemData: {
+    id: string;
+    title: string;
+    color: string;
+  }) => {
+    const pressHandler = () => {
+      props.navigation.navigate("MealOverview", {
+        categoryId: itemData.id,
+      });
+    };
+
+    return (
+      <CategoryGridTile
+        title={itemData.title}
+        color={itemData.color}
+        onPress={pressHandler}
+      />
+    );
+  };
   return (
     <FlatList
       data={CATEGORIES}

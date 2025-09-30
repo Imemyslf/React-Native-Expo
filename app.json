@@ -5,11 +5,13 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
+    "backgroundColor": "#24180f",
     "scheme": "navigation",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.anonymous.Navigation"
     },
     "android": {
       "adaptiveIcon": {
@@ -19,7 +21,8 @@
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
       },
       "edgeToEdgeEnabled": true,
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "package": "com.anonymous.Navigation"
     },
     "web": {
       "output": "static",
@@ -38,7 +41,7 @@
             "backgroundColor": "#000000"
           }
         }
-      ]
+      ],
     ],
     "experiments": {
       "typedRoutes": true,

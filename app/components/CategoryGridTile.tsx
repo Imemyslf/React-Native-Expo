@@ -1,21 +1,23 @@
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { Platform, Pressable, StyleSheet, Text, View } from "react-native";
 
 interface CategoryGridTileType {
   title: string;
   color: string;
+  onPress: () => void;
 }
 
-const CategoryGridTile = ({ title, color }: CategoryGridTileType) => {
+const CategoryGridTile = ({ title, color, onPress }: CategoryGridTileType) => {
   return (
     <View style={styles.gridItem}>
       <Pressable
-        // android_ripple={{ color: "#ccc" }}
+        android_ripple={{ color: "#ccc" }}
         style={({ pressed }) => [
           styles.button,
-          pressed ? styles.pressedButton : styles.unpressedText,
+          pressed ? styles.buttonPressed : null,
         ]}
+        onPress={onPress}
       >
-        <View style={styles.innerContainer}>
+        <View style={[styles.innerContainer, { backgroundColor: color }]}>
           <Text>{title}</Text>
         </View>
       </Pressable>
@@ -37,6 +39,7 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.25,
     shadowRadius: 8,
+    overflow: Platform.OS === "android" ? "hidden" : "visible",
   },
   button: {
     flex: 1,
@@ -44,6 +47,7 @@ const styles = StyleSheet.create({
   innerContainer: {
     flex: 1,
     padding: 16,
+    borderRadius: 8,
     justifyContent: "center",
     alignItems: "center",
   },
@@ -51,12 +55,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 18,
   },
-  pressedButton: {
-    backgroundColor: "darkblue",
-    opacity: 0.8,
-  },
-  unpressedText: {
-    color: "white",
-    fontSize: 16,
+  buttonPressed: {
+    opacity: 0.5,
   },
 });
