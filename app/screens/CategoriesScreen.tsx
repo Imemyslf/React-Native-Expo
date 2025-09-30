@@ -1,13 +1,15 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { FlatList, StyleSheet } from "react-native";
 
+import { DrawerScreenProps } from "@react-navigation/drawer";
+import { CompositeScreenProps } from "@react-navigation/native";
 import CategoryGridTile from "../components/CategoryGridTile";
 import { CATEGORIES } from "../data/dummy_data";
-import { RootStackParamList } from "../navigation/types";
+import { DrawerStackParamList, RootStackParamList } from "../navigation/types";
 
-type CategoriesScreenProps = NativeStackScreenProps<
-  RootStackParamList,
-  "MealCategories"
+type CategoriesScreenProps = CompositeScreenProps<
+  DrawerScreenProps<DrawerStackParamList, "Categories">,
+  NativeStackScreenProps<RootStackParamList>
 >;
 
 const CategoriesScreen = (props: CategoriesScreenProps) => {
@@ -41,4 +43,5 @@ const CategoriesScreen = (props: CategoriesScreenProps) => {
 };
 
 export default CategoriesScreen;
+
 const styles = StyleSheet.create({});
