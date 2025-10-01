@@ -4,6 +4,7 @@ import { FlatList, StyleSheet } from "react-native";
 import { DrawerScreenProps } from "@react-navigation/drawer";
 import { CompositeScreenProps } from "@react-navigation/native";
 import CategoryGridTile from "../components/CategoryGridTile";
+import { Colors } from "../constants/Colors";
 import { CATEGORIES } from "../data/dummy_data";
 import { DrawerStackParamList, RootStackParamList } from "../navigation/types";
 
@@ -38,10 +39,15 @@ const CategoriesScreen = (props: CategoriesScreenProps) => {
       renderItem={(itemData) => renderList(itemData.item)}
       keyExtractor={(item) => item.id}
       numColumns={2}
+      style={styles.container}
     />
   );
 };
 
 export default CategoriesScreen;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: Colors.primary600,
+  },
+});

@@ -1,5 +1,5 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { useLayoutEffect } from "react";
+import { useContext, useLayoutEffect } from "react";
 import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
 
 import IconButton from "../components/IconButton";
@@ -8,25 +8,38 @@ import List from "../components/MealDetailsComponent/List";
 import Subtitle from "../components/MealDetailsComponent/Subtitle";
 import { MEALS } from "../data/dummy_data";
 import { RootStackParamList } from "../navigation/types";
+import { FavouriteContext } from "../store/context/FavouriteContext";
 
 type MealStackProps = NativeStackScreenProps<RootStackParamList, "MealDetail">;
 
 const MealDetailScreen = (props: MealStackProps) => {
+  const favouriteMealContext = useContext(FavouriteContext);
+
   const mealId = props.route.params?.mealId;
 
   const selectedMeal = MEALS.find((meal) => meal.id === mealId);
 
-  const pressableHandler = () => {
-    console.log("Pressed!");
-  };
+  const mealsIsFavourite = favouriteMealContext.ids.includes(mealId);
 
   useLayoutEffect(() => {
+    const changeFavouriteStatusHandler = () => {
+      if (mealsIsFavourite) {
+        favouriteMealContext.removeFavourites(mealId);
+      } else {
+        favouriteMealContext.addFavourites(mealId);
+      }
+    };
+
     props.navigation.setOptions({
       headerRight: () => (
-        <IconButton icon="star" color="white" onPress={pressableHandler} />
+        <IconButton
+          icon={mealsIsFavourite ? "star" : "star-outline"}
+          color="white"
+          onPress={changeFavouriteStatusHandler}
+        />
       ),
     });
-  }, [props]);
+  }, [props, favouriteMealContext, mealId, mealsIsFavourite]);
 
   return (
     <ScrollView style={styles.container}>
@@ -77,5 +90,3 @@ const styles = StyleSheet.create({
     width: "80%",
   },
 });
-
-// #3f2f25

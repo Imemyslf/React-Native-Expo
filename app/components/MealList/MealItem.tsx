@@ -9,8 +9,8 @@ import {
   View,
 } from "react-native";
 
-import { RootStackParamList } from "../navigation/types";
-import MealDetails from "./MealDetails";
+import { RootStackParamList } from "../../navigation/types";
+import MealDetails from "../MealDetails";
 
 interface MealsType {
   id: string;
